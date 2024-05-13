@@ -1,11 +1,5 @@
-import { UserButton } from "@clerk/nextjs";
-
 function page() {
-  return (
-    <div>
-      <UserButton />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default page;
