@@ -18,11 +18,11 @@ model Budget {
 }
 
 model Expense {
-  id     String @id @default(uuid())
-  name   String
-  amount Int
+  id            String @id @default(uuid())
+  name          String
+  expenseAmount Int
 
-  createdBy String
+  createdAt DateTime @default(now())
 
   budgetId String @unique
   budget   Budget @relation(fields: [budgetId], references: [id])
