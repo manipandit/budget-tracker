@@ -6,3 +6,24 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Budget {
+  id        String  @id @default(uuid())
+  name      String
+  amount    Int
+  icon      String?
+  createdBy String
+
+  expense Expense?
+}
+
+model Expense {
+  id     String @id @default(uuid())
+  name   String
+  amount Int
+
+  createdBy String
+
+  budgetId String @unique
+  budget   Budget @relation(fields: [budgetId], references: [id])
+}
