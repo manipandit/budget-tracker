@@ -14,7 +14,7 @@ model Budget {
   icon      String?
   createdBy String
 
-  expense Expense?
+  expenses Expense[]
 }
 
 model Expense {
@@ -24,6 +24,6 @@ model Expense {
 
   createdAt DateTime @default(now())
 
-  budgetId String @unique
+  budgetId String
   budget   Budget @relation(fields: [budgetId], references: [id])
 }

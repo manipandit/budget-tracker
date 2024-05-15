@@ -22,7 +22,7 @@ function Sidebar() {
       <div className="mt-5">
         {sideBarList.map((item) => {
           return (
-            <Link href={item.path}>
+            <Link key={item.id} href={item.path}>
               <h2
                 key={item.id}
                 className={cn(

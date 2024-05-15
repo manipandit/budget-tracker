@@ -17,7 +17,11 @@ import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-function CreateBudget() {
+function CreateBudget({
+  handleGetAllBudgets,
+}: {
+  handleGetAllBudgets: () => void;
+}) {
   const [loading, setLoading] = useState(false);
   const [emojiIcon, setEmojiIcon] = useState("😁");
   const [openEmojiDialog, setOpenEmojiDialog] = useState(false);
@@ -34,6 +38,7 @@ function CreateBudget() {
       const response = await createBudget(name, amount, emojiIcon, userEmail!);
 
       if (response.data.id) {
+        handleGetAllBudgets();
         toast("Budget created successfully");
       }
     } catch (error) {
@@ -47,7 +52,7 @@ function CreateBudget() {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className="bg-slate-100 p-10 rounded flex flex-col items-center border-2 border-dashed cursor-pointer hover:shadow-sm">
+          <div className="bg-slate-100 h-[170px] p-10 rounded flex flex-col items-center justify-center border-2 border-dashed cursor-pointer hover:shadow-sm">
             <h2 className="text-3xl">+</h2>
             <h2>Create New Budget</h2>
           </div>
@@ -85,7 +90,7 @@ function CreateBudget() {
                   <h2 className="text-black font-medium my-1">Budget Amount</h2>
                   <Input
                     type="number"
-                    placeholder="e.g. $1000"
+                    placeholder="e.g. ₹1000"
                     onChange={(e) => setAmount(Number(e.target.value))}
                   />
                 </div>
