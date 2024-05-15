@@ -15,9 +15,9 @@ function BudgetItem({ budget }: { budget: BudgetList }) {
             {budget?.icon}
           </h2>
           <div>
-            <h2>{budget.name}</h2>
+            <h2 className="font-bold">{budget.name}</h2>
             <h2 className="text-sm text-gray-400">
-              {budget.totalExpenseCount} Items
+              {budget.totalExpenseCount} Expenses
             </h2>
           </div>
         </div>

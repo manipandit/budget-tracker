@@ -95,3 +95,43 @@ export async function getBudgetInfo(userEmail: string, id: string)
     throw new Error(error.message);
   }
 }
+
+export async function removeBudget(budgetId: string)
+{
+  try {
+    const result = await prisma.budget.delete({
+      where: {
+        id: budgetId,
+      }
+    })
+
+    return result;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+}
+
+export async function updateBudget(name: string, amount: number, icon: string, budgetId: string)
+{
+  try {
+    const result = await prisma.budget.update({
+      where: {
+        id: budgetId,
+      },
+      data: {
+        name,
+        amount,
+        icon,
+      },
+      select: {
+        id: true,
+      }
+    })
+
+    return result;
+  } catch (error: any) {
+     console.log(error);
+      throw new Error(error.message);
+  }
+}

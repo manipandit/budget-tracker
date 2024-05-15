@@ -29,6 +29,7 @@ function CreateExpense({
   };
   return (
     <div className="border rounded-lg p-5">
+      <h2 className="text-xl font-bold">Add Expense</h2>
       <div className="mt-3">
         <h2 className="text-black font-medium my-1">Expense Name</h2>
         <Input
