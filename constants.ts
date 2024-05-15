@@ -19,10 +19,4 @@ export const sideBarList = [
         icon: ReceiptText,
         path: "/dashboard/expense"
     },
-    { 
-        id: 4,
-        name: 'Upgrade',
-        icon: ShieldCheck,
-        path: "/dashboard/upgrade"
-    },
 ]

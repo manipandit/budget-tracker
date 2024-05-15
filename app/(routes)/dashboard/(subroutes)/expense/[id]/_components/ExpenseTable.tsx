@@ -18,14 +18,14 @@ export function ExpenseTable({
   fetchBudgetInfo,
 }: {
   expenses: Expense[];
-  fetchBudgetInfo: () => void;
+  fetchBudgetInfo?: () => void;
 }) {
   const removeExpense = async (expenseId: string) => {
     try {
       const result = await deleteExpense(expenseId);
 
       if (result.id) {
-        fetchBudgetInfo();
+        if (fetchBudgetInfo) fetchBudgetInfo();
         toast("Expense deleted successfully");
       }
     } catch (error) {
@@ -35,7 +35,9 @@ export function ExpenseTable({
   };
   return (
     <div>
-      <h2 className="text-xl font-bold mb-2">Recent Expenses</h2>
+      {fetchBudgetInfo && (
+        <h2 className="text-xl font-bold mb-2">Recent Expenses</h2>
+      )}
       <Table className="border">
         <TableCaption>A list of your recent expenses.</TableCaption>
         <TableHeader className="bg-slate-100">
@@ -43,9 +45,11 @@ export function ExpenseTable({
             <TableHead className="font-bold text-black">Name</TableHead>
             <TableHead className="font-bold text-black">Amount</TableHead>
             <TableHead className="font-bold text-black">Date</TableHead>
-            <TableHead className="font-bold text-left text-black">
-              Action
-            </TableHead>
+            {fetchBudgetInfo && (
+              <TableHead className="font-bold text-left text-black">
+                Action
+              </TableHead>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -58,12 +62,14 @@ export function ExpenseTable({
               <TableCell className="font-medium">
                 {new Date(expense.createdAt).toLocaleString()}
               </TableCell>
-              <TableCell className="font-medium">
-                <Trash
-                  className="text-red-400 cursor-pointer h-5 w-5 text-right"
-                  onClick={() => removeExpense(expense.id)}
-                />
-              </TableCell>
+              {fetchBudgetInfo && (
+                <TableCell className="font-medium">
+                  <Trash
+                    className="text-red-400 cursor-pointer h-5 w-5 text-right"
+                    onClick={() => removeExpense(expense.id)}
+                  />
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>

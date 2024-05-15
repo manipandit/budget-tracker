@@ -12,10 +12,13 @@ import { getExpenses } from "@/actions/expense";
 import { ExpenseTable } from "./_components/ExpenseTable";
 import DeleteBudget from "./_components/DeleteBudget";
 import EditBudget from "./_components/EditBudget";
+import { MoveLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function ExpensePage({ params }: { params: { id: string } }) {
-  console.log(params.id);
+  // console.log(params.id);
 
+  const router = useRouter();
   const { user } = useUser();
   const [budgetInfo, setBudgetInfo] = useState<BudgetList[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -53,7 +56,15 @@ function ExpensePage({ params }: { params: { id: string } }) {
   return (
     <div className="p-10">
       <div className="flex items-center justify-between mb-5">
-        <h2 className="text-2xl font-bold mb-4">My Expenses</h2>
+        <div className="flex gap-x-2">
+          <MoveLeft
+            className="text-2xl font-bold cursor-pointer"
+            onClick={() => {
+              router.back();
+            }}
+          />
+          <h2 className="text-2xl font-bold mb-4">My Expenses</h2>
+        </div>
         <div className="flex gap-x-3 items-center">
           <EditBudget
             fetchBudgetInfo={fetchBudgetInfo}
