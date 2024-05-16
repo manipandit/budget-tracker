@@ -32,7 +32,13 @@ async function page() {
       <div>
         <h2 className="text-2xl font-bold">List of Expenses</h2>
         <div className="mt-5">
-          <Expenses expenses={allExpenses} />
+          {allExpenses.length === 0 ? (
+            <span className="text-xl text-muted-foreground text-center">
+              No Expenses yet
+            </span>
+          ) : (
+            <Expenses expenses={allExpenses} />
+          )}
         </div>
       </div>
     </div>

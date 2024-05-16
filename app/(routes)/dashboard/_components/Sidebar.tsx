@@ -11,15 +11,20 @@ function Sidebar() {
   const pathname = usePathname();
   return (
     <div className="h-screen p-5 border-r shadow-sm">
-      <Image
-        src={"/logo.svg"}
-        width={30}
-        height={30}
-        alt="logo"
-        className="ml-5"
-      />
+      <div className="flex gap-x-2 items-center">
+        <Image
+          src={"/logo.svg"}
+          width={30}
+          height={30}
+          alt="logo"
+          className="ml-5"
+        />
+        <div className="text-lg font-bold bg-gradient-to-r from-[#008cff] to-sky-400 bg-clip-text text-transparent">
+          Budget Tracker
+        </div>
+      </div>
 
-      <div className="mt-5">
+      <div className="mt-8">
         {sideBarList.map((item) => {
           return (
             <Link key={item.id} href={item.path}>

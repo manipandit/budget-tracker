@@ -13,7 +13,7 @@ export async function createExpense(name: string, amount: number, budgetId: stri
                 id: true,
             },
         });
-        console.log(response);
+        // console.log(response);
         return {data: response};
     } catch (error: any) {
         // console.log(error);

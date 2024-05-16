@@ -4,7 +4,7 @@ import React from "react";
 function DashboardHeader() {
   return (
     <div className="p-5 border-b shadow-sm flex justify-between items-center">
-      <div>Search Bar</div>
+      <div></div>
       <div>
         <UserButton />
       </div>

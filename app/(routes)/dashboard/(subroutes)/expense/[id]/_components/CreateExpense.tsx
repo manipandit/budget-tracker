@@ -1,6 +1,7 @@
 import { createExpense } from "@/actions/expense";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -11,11 +12,13 @@ function CreateExpense({
   budgetId: string;
   fetchBudgetInfo: () => void;
 }) {
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
 
   const addNewExpense = async () => {
     try {
+      setLoading(true);
       const result = await createExpense(name, amount, budgetId);
 
       if (result.data.id) {
@@ -25,6 +28,8 @@ function CreateExpense({
     } catch (error: any) {
       console.log(error);
       //   throw new Error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -50,7 +55,7 @@ function CreateExpense({
         disabled={!(name && amount)}
         className="mt-5 w-full"
       >
-        Add New Expense
+        {loading ? <Loader2 className="animate-spin" /> : "Add New Expense"}
       </Button>
     </div>
   );

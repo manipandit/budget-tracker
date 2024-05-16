@@ -15,7 +15,7 @@ export async function createBudget(name: string, amount: number, emojiIcon: stri
                 id: true,
             },
       });
-      console.log(response);
+      // console.log(response);
       return {data: response};
     } catch (error) {
         console.log(error);
@@ -89,7 +89,7 @@ export async function getBudgetInfo(userEmail: string, id: string)
         totalExpenseCount: totals?._count.id || 0,
       };
     });
-    console.log(budgetsWithTotals);
+    // console.log(budgetsWithTotals);
     return budgetsWithTotals;
   } catch (error: any) {
     throw new Error(error.message);
