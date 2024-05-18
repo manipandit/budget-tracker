@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@clerk/nextjs";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import { BudgetList } from "../../../budget/_components/BudgetList";
 import { updateBudget } from "@/actions/budget";
 import { toast } from "sonner";
@@ -88,10 +88,13 @@ function EditBudget({
                       setEmojiIcon(e.emoji);
                       setOpenEmojiDialog(false);
                     }}
+                    theme={Theme.AUTO}
                   />
                 </div>
                 <div className="mt-3">
-                  <h2 className="text-black font-medium my-1">Budget Name</h2>
+                  <h2 className="text-black font-medium my-1 dark:text-white">
+                    Budget Name
+                  </h2>
                   <Input
                     placeholder="e.g. Home Decor"
                     defaultValue={budgetInfo?.name}
@@ -99,7 +102,9 @@ function EditBudget({
                   />
                 </div>
                 <div className="mt-3">
-                  <h2 className="text-black font-medium my-1">Budget Amount</h2>
+                  <h2 className="text-black font-medium my-1 dark:text-white">
+                    Budget Amount
+                  </h2>
                   <Input
                     type="number"
                     placeholder="e.g. ₹1000"

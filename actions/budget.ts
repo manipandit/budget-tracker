@@ -96,6 +96,36 @@ export async function getBudgetInfo(userEmail: string, id: string)
   }
 }
 
+export async function getBudgetInfoById(userEmail: string, id: string)
+{
+  try {
+    const budget = await prisma.budget.findUnique({
+        where: {
+          createdBy: userEmail,
+          id: id,
+        },
+        include: {
+          expenses: true,
+        },
+    });
+
+    if (!budget) {
+      throw new Error('Budget not found');
+    }
+
+    const totalExpenseAmount = budget.expenses.reduce((total, expense) => total + expense.expenseAmount, 0);
+
+    const budgetAmount = budget.amount;
+
+    return {
+      budgetAmount: budgetAmount,
+      totalExpenseAmount: totalExpenseAmount
+    };    
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
 export async function removeBudget(budgetId: string)
 {
   try {

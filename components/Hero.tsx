@@ -13,8 +13,9 @@ function Hero() {
             </strong>
           </h1>
 
-          <p className="mt-4 sm:text-xl/relaxed">
-            Start creating your budget and save ton of money.
+          <p className="mt-4 sm:text-base text-muted-foreground">
+            Kickstart your budget planning and see your savings soar with our
+            app!
           </p>
 
           <HeroNavigate />

@@ -40,7 +40,7 @@ export function ExpenseTable({
       )}
       <Table className="border">
         <TableCaption>A list of your recent expenses.</TableCaption>
-        <TableHeader className="bg-slate-50">
+        <TableHeader className="bg-slate-50 ">
           <TableRow>
             <TableHead className="font-bold text-black">Name</TableHead>
             <TableHead className="font-bold text-black">Amount</TableHead>

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@clerk/nextjs";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -52,9 +52,9 @@ function CreateBudget({
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <div className="bg-slate-100 h-[170px] p-10 rounded flex flex-col items-center justify-center border-2 border-dashed cursor-pointer hover:shadow-sm">
+          <div className="bg-slate-100 h-[170px] p-10 rounded flex flex-col items-center justify-center border-2 border-dashed cursor-pointer hover:shadow-sm dark:text-black">
             <h2 className="text-3xl">+</h2>
-            <h2>Create New Budget</h2>
+            <h2 className="">Create New Budget</h2>
           </div>
         </DialogTrigger>
         <DialogContent>
@@ -77,17 +77,22 @@ function CreateBudget({
                       setEmojiIcon(e.emoji);
                       setOpenEmojiDialog(false);
                     }}
+                    theme={Theme.AUTO}
                   />
                 </div>
                 <div className="mt-3">
-                  <h2 className="text-black font-medium my-1">Budget Name</h2>
+                  <h2 className="text-black font-medium my-1 dark:text-white">
+                    Budget Name
+                  </h2>
                   <Input
                     placeholder="e.g. Home Decor"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="mt-3">
-                  <h2 className="text-black font-medium my-1">Budget Amount</h2>
+                  <h2 className="text-black font-medium my-1 dark:text-white">
+                    Budget Amount
+                  </h2>
                   <Input
                     type="number"
                     placeholder="e.g. ₹1000"

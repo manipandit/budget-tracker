@@ -11,7 +11,7 @@ function Sidebar() {
   const pathname = usePathname();
   return (
     <div className="h-screen p-5 border-r shadow-sm">
-      <div className="flex gap-x-2 items-center">
+      <Link href={"/"} className="flex gap-x-2 items-center">
         <Image
           src={"/logo.svg"}
           width={30}
@@ -22,7 +22,7 @@ function Sidebar() {
         <div className="text-lg font-bold bg-gradient-to-r from-[#008cff] to-sky-400 bg-clip-text text-transparent">
           Budget Tracker
         </div>
-      </div>
+      </Link>
 
       <div className="mt-8">
         {sideBarList.map((item) => {
@@ -31,8 +31,10 @@ function Sidebar() {
               <h2
                 key={item.id}
                 className={cn(
-                  `flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-primary hover:bg-sky-100 mt-2`,
-                  pathname === item.path ? "bg-sky-100" : ""
+                  `flex gap-2 items-center text-gray-500 font-medium p-5 cursor-pointer rounded-md hover:text-primary hover:bg-sky-100 dark:hover:bg-slate-700 mt-2`,
+                  pathname === item.path
+                    ? "bg-sky-100 dark:bg-slate-700 dark:text-primary"
+                    : ""
                 )}
               >
                 <item.icon />

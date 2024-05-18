@@ -1,6 +1,6 @@
 "use client";
 
-import { getBudgetInfo } from "@/actions/budget";
+import { getBudgetInfo, getBudgetInfoById } from "@/actions/budget";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { BudgetList } from "../../budget/_components/BudgetList";
@@ -15,13 +15,20 @@ import EditBudget from "./_components/EditBudget";
 import { MoveLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+export interface BudgetData {
+  budgetAmount: number;
+  totalExpenseAmount: number;
+}
+
 function ExpensePage({ params }: { params: { id: string } }) {
   // console.log(params.id);
 
   const router = useRouter();
   const { user } = useUser();
+  const userEmail = user?.primaryEmailAddress?.emailAddress;
   const [budgetInfo, setBudgetInfo] = useState<BudgetList[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [budgetData, setBudgetData] = useState<BudgetData>();
 
   const fetchBudgetInfo = async () => {
     try {
@@ -32,9 +39,19 @@ function ExpensePage({ params }: { params: { id: string } }) {
 
       setBudgetInfo(res);
       fetchExpenses();
+      budget();
     } catch (error) {
       console.log(error);
       throw new Error("Something went wrong");
+    }
+  };
+
+  const budget = async () => {
+    try {
+      const amountInfo = await getBudgetInfoById(userEmail!, params.id);
+      setBudgetData(amountInfo);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -80,7 +97,12 @@ function ExpensePage({ params }: { params: { id: string } }) {
           <Skeleton className="h-[170px] w-full" />
         )}
 
-        <CreateExpense fetchBudgetInfo={fetchBudgetInfo} budgetId={params.id} />
+        <CreateExpense
+          budget={budget}
+          budgetData={budgetData!}
+          fetchBudgetInfo={fetchBudgetInfo}
+          budgetId={params.id}
+        />
       </div>
       <div className="mt-10">
         {expenses.length > 0 ? (
