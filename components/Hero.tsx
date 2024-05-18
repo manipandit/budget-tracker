@@ -3,7 +3,7 @@ import HeroNavigate from "./HeroNavigate";
 
 function Hero() {
   return (
-    <section className="bg-gray-50 flex flex-col items-center">
+    <section className="bg-gray-50 flex flex-col items-center dark:bg-background">
       <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex">
         <div className="mx-auto max-w-xl text-center">
           <h1 className="text-4xl font-extrabold sm:text-5xl">
